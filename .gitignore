@@ -187,9 +187,6 @@ orleans.codegen.cs
 
 /node_modules
 
-# Package-lock.json
-/package-lock.json
-
 # RIA/Silverlight projects
 Generated_Code/
 

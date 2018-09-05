@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { actionCreators } from '../store/Presidents';
+import { actionCreators } from '../actions/presidentsActions';
 
 class FetchData extends Component {
   constructor(props) {
@@ -21,7 +21,23 @@ class FetchData extends Component {
     this.setState({ asc: !this.state.asc });
   }
 
+  renderPresidents(presidents) {
+    return presidents ? (
+      <tbody>
+        {presidents.map(president =>
+          <tr key={president.id}>
+            <td>{president.name}</td>
+          </tr>
+        )}
+      </tbody>
+    ) : (
+        <div>Loading...</div>
+      );
+  }
+
   renderForecastsTable(props) {
+    const presidents = this.renderPresidents(props.presidents);
+
     return (
       <table className='table'>
         <thead>
@@ -34,13 +50,7 @@ class FetchData extends Component {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {props.presidents.map(president =>
-            <tr key={president.id}>
-              <td>{president.name}</td>
-            </tr>
-          )}
-        </tbody>
+        {presidents}
       </table>
     );
   }
